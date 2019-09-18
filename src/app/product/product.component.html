@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-sm-8">
+      <div *ngIf="!hideNewProject">
+        <h2>New Project</h2>
+        <form #form="ngForm" (ngSubmit)="onSubmitAddProject(form)" class="well">
+          <div class="form-group">
+              <label>Project Id</label>
+              <input type="text" class="form-control" name="projectid" required [(ngModel)]="proj.projectid">
+          </div>
+          <div class="form-group">
+              <label>Project Name</label>
+              <input type="text" class="form-control" name="name" required [(ngModel)]="proj.name">
+          </div>
+          <button type="submit" class="btn btn-success">Save</button>
+        </form>
+      </div>
+
+      <productdata
+
+      (eventi)="onUpdateProjectEvent($event)"
+      *ngIf='selectedProject && hideNewProject'
+      [Project] = 'selectedProject'>
+      </productdata>
+      </div>
+      <!-- <div *ngIf="!hideHead">
+        <h2>Fill in the data</h2>
+        <form #head="ngForm" (ngSubmit)="submitHead(head)" class="well">
+          <div class="form-group">
+              <label>Field 1</label>
+              <input type="text" class="form-control" name="field1" required [(ngModel)]="heads.field1">
+          </div>
+          <div class="form-group">
+              <label>Field 2</label>
+              <input type="text" class="form-control" name="field2" required [(ngModel)]="heads.field2">
+          </div>
+          <div class="form-group">
+              <label>Field 3</label>
+              <input type="text" class="form-control" name="field3" required [(ngModel)]="heads.field3">
+          </div>
+          <div class="form-group">
+              <label>Field 4</label>
+              <input type="text" class="form-control" name="field4" required [(ngModel)]="heads.field4">
+          </div>
+          <button type="submit" class="btn btn-success">Save</button>
+        </form>
+      </div> -->
+
+
+    <div class="col-sm-4">
+      <button (click)="newProject()" type="button" class="btn btn-success btn-block">+ New Project</button>
+      <br>
+      <br>
+      <prodlist (SelectProject)="onSelectProject($event)" [projects]="projects" (eventii)="delEvent($event)"></prodlist>
+    </div>
+  </div>

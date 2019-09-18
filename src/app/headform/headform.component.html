@@ -1,0 +1,50 @@
+<h2 class="inactive underlineHover" *ngIf="!exist" style="float:center">Fill in the data</h2>
+<h2 class="inactive underlineHover" *ngIf="exist" align="center">Heads</h2>
+<form #head="ngForm" (ngSubmit)="submitHead(head);head.reset()" class="well">
+  <div class="form-group">
+      <label>Physical Product Design Head</label>
+      <input type="text" class="form-control" name="field1" required [(ngModel)]="data.ppdh">
+  </div>
+  <div class="form-group">
+      <label>Instruction Manual Design Head</label>
+      <input type="text" class="form-control" name="field2" required [(ngModel)]="data.imdh">
+  </div>
+  <div class="form-group">
+      <label>QC Manager</label>
+      <input type="text" class="form-control" name="field3" required [(ngModel)]="data.qc">
+  </div>
+  <div class="form-group">
+      <label>Box Design Head</label>
+      <input type="text" class="form-control" name="field4" required [(ngModel)]="data.bdh">
+  </div>
+  <div class="form-group">
+      <label>Content Creator</label>
+      <input type="text" class="form-control" name="field5" required [(ngModel)]="data.cc">
+  </div>
+  <div class="form-group">
+      <label>Box Artwork Creator</label>
+      <input type="text" class="form-control" name="field6" required [(ngModel)]="data.bac">
+  </div>
+  <div class="form-group">
+      <label>Launch Incharge</label>
+      <input type="text" class="form-control" name="field7" required [(ngModel)]="data.li">
+  </div>
+  <div class="form-group">
+      <label>Videography Head</label>
+      <input type="text" class="form-control" name="field8" required [(ngModel)]="data.vh">
+  </div>
+  <div class="form-group">
+      <label>Animator</label>
+      <input type="text" class="form-control" name="field9" required [(ngModel)]="data.animator">
+  </div>
+  <div class="form-group">
+      <label>DTP Operator</label>
+      <input type="text" class="form-control" name="field10" required [(ngModel)]="data.dtpoperator">
+  </div>
+  <div class="form-group">
+      <label>Project id</label>
+      <input type="text" class="form-control" name="field11" required [(ngModel)]="id">
+  </div>
+  <button type="button" name="button" class="btn btn-link" (click)="detailpage()">Details -></button>
+  <button type="submit" *ngIf="!exist" class="btn btn-success">Save</button>
+</form>

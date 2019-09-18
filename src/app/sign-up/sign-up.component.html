@@ -1,0 +1,40 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <h2 class="inactive underlineHover">Sign Up </h2>
+
+    <form #form="ngForm" (ngSubmit)="onSubmitAddUser(form); form.reset()" class="well">
+        <div class="form-group">
+            <p><strong>Name</strong></p>
+            <input type="text" class="form-control" name="name" required [(ngModel)]="user.name">
+        </div>
+        <div class="form-group">
+            <p><strong>Email</strong></p>
+            <input type="text" class="form-control" name="email" required [(ngModel)]="user.email">
+        </div>
+        <div class="form-group">
+            <p><strong>Password</strong></p>
+            <input type="password" minlength = 4 class="form-control" name="password" required [(ngModel)]="user.password">
+        </div>
+        <button type="submit" class="btn btn-success">Sign Up</button>
+      </form>
+
+    <!-- <form #form="ngForm" (ngSubmit)="onSubmitAddUser(form)">
+          <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" name="fullname" required >
+            </div>
+            <div *ngIf="title.invalid" class="invalid-feedback">
+                        <div *ngIf="title.errors.required">Title is required</div>
+                    </div>
+          <div class="form-group">
+              <label>Email</label>
+              <input type="text" class="form-control" name="email" required >
+          </div>
+          <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" name="password" required minlength="4"  >
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Sign Up</button>
+        </form> -->
+      </div>
+    </div>

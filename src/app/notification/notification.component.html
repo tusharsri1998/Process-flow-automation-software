@@ -1,0 +1,50 @@
+
+<!-- <p>notification works</p>
+<div class="col-sm-3">
+  <ul class="nav flex-column">
+    <li class="nav-item">
+    <a class="nav-link" routerLink='/product', routerLinkActive='active'>Go to Projects</a>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link" (click)="logout()">Logout</button>
+  </li>
+  </ul>
+</div> -->
+
+
+<div class="col-sm-3">
+<ul class="nav nav-pills nav-stacked">
+    <div class="btn-group-vertical">
+      <br>
+      <h2 *ngIf="user_type==1">Admin Panel</h2>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    <button class="btn btn-primary" [routerLink]="['/product']">Go to Projects</button>
+    <br>
+    <br>
+    <button class="btn btn-primary" (click)="logout()">Logout</button>
+    </div>
+  </ul>
+</div>
+
+<div class="col-sm-9">
+
+  <h1>Notifications</h1>
+  <div class="col-sm-9">
+  <h3 *ngIf="!info.notify[0]">No Notifications to display</h3>
+  <div class="btn-group-vertical">
+    <button class="btn btn-link" *ngFor="let data of info.notify" ><ng-template [ngIf]="!data.approval"> {{ data.content }} </ng-template> </button>
+  </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="btn-group-vertical" *ngIf="info.user_type==1">
+    <button  *ngFor="let data of info.notify" class="btn btn-success" (click)="disp(data)" ><ng-template [ngIf]="!data.approval">Approve</ng-template></button>
+    </div>
+    <div class="btn-group-vertical" *ngIf="info.user_type==2 || info.user_type==3">
+      <button *ngFor="let data of info.notify" class="btn btn-success" ><ng-template [ngIf]="!data.approval">Mark as Read</ng-template></button>
+    </div>
+  </div>
+</div>

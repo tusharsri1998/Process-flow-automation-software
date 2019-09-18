@@ -1,0 +1,141 @@
+
+<div class="col-sm-8">
+  <h2>Stage Name</h2>
+  <p >stage2 works! The guidelines for this stage goes in here.</p>
+  <br>
+  <br>
+  <div class="container" *ngIf="checkifres && stagedata.stages[1].approval">
+    <h3>Stage Completed</h3>
+  </div>
+  <br>
+  <h3>Done By {{ dat.ppdh }}</h3>
+  <form #data="ngForm" (ngSubmit)="submitData(data)">
+    <div class="form-group">
+        <label>Proposed Date</label>
+        <input *ngIf="dp" type="date" class="form-control" name="proposed_date" required [(ngModel)] = "dp" >
+        <input *ngIf="!dp" type="date" class="form-control" name="proposed_date" required ngModel>
+
+    </div>
+<!-- stagedata.stages[0].docinfo -->
+    <div class="form-group" *ngIf="checkifres">
+
+      <label>Checklist Of Documents</label>
+      <table class="table table-striped table-bordered">
+          <thead>
+              <tr>
+                  <th class="col-sm-10">Item</th>
+                  <th class="col-sm-2">Check</th>
+              </tr>
+          </thead>
+          <tbody *ngIf="stagedata">
+               <tr >
+                  <td>
+                    <p *ngFor="let data of stagedata.stages[1].docinfo">{{ data.doc_name }}</p>
+                  </td>
+                  <td>
+                    <p *ngFor="let data of stagedata.stages[1].docinfo">{{ data.check }}</p>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+<!-- && !stagedata.stages[0].docinfo -->
+    <div class="form-group" style="margin-top: 5%" *ngIf="!checkifres">
+      <label>Checklist Of Documents</label>
+      <table class="table table-striped table-bordered">
+          <thead>
+              <tr>
+                  <th class="col-sm-2">Action</th>
+                  <th class="col-sm-8">Item</th>
+                  <th class="col-sm-2">Check</th>
+
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dynamic of dynamicArray; let i = index;">
+             <button type='button' class ='btn btn-danger' (click)="deleteRow(i)">-  Delete row
+               <i class="fa fa-trash fa-2x"></i>
+             </button>
+               <td>
+                 <input  [(ngModel)]="dynamicArray[i].Item" class="form-control" name={{this.dynamicArray}} type="text" />
+               </td>
+               <td>
+                 <input   [(ngModel)]="dynamicArray[i].check" class="form-control" name="check" type="checkbox"  />
+               </td>
+           </tr>
+           <tr>
+             <button type='button' class ='btn btn-primary' (click)="addRow(i)">+ Add row
+               <i  class="fa fa-plus fa-2x"></i>
+             </button>
+           </tr>
+          </tbody>
+      </table>
+    </div>
+    <div class="form-group" *ngIf="da">
+        <label>Actual Date</label>
+        <input type="date" class="form-control" name="actdate" required [(ngModel)] = "da">
+    </div>
+    <div class="form-group" *ngIf="checkifres  && stagedata.stages[1].approval">
+      <ng-multiselect-dropdown name="drop"
+      [placeholder]="'custom placeholder'"
+      [data]="dropdownList"
+      [(ngModel)]="selectedItems"
+      [settings]="dropdownSettings"
+      (onSelect)="onItemSelect($event)"
+      (onSelectAll)="onSelectAll($event)"
+    >
+    </ng-multiselect-dropdown>
+    </div>
+
+  <br>
+  <br>
+
+    <button *ngIf="!checkifres" type="submit" class="btn btn-success" >Save</button>
+  </form>
+  <br>
+  <br>
+  <!-- !stagedata.stages[0].approval  -->
+  <div class="container" *ngIf="checkifres && !stagedata.stages[1].approval">
+    <button type="checkbox" name="button" (click)="approve()">Send for approval</button>
+  </div>
+
+</div>
+<div class="col-sm-1">
+  <p>|</p>
+</div>
+<div class="col-sm-3" *ngIf="info.user_type==2">
+  <h2> Edit Options </h2>
+  <br>
+  <form #edit="ngForm" (ngSubmit)="changedate(edit)" *ngIf="dp">
+    <label for="cdate">Change Proposed Date</label>
+    <input type="date" ngModel class="form-control" name="cdate">
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <form #add="ngForm" (ngSubmit)="adddoc(add)">
+    <label>Add document</label>
+    <input type="text" ngModel class="form-control" name="docname">
+    <input type="checkbox" ngModel class="form-control" name="doccheck">
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <form #dateadd="ngForm" (ngSubmit)="dateset(dateadd)">
+    <label>Enter actual date of completion</label>
+    <input type="date" ngModel class="form-control" name="acdate">
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <form #check="ngForm" (ngSubmit)="checkset(check)">
+    <label>Change Check value of document</label>
+    <select class="form-control" name="change" ngModel>
+      <option *ngFor="let c of stagedata.stages[0].docinfo" >{{ c.doc_name }}</option>
+    </select>
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+</div>

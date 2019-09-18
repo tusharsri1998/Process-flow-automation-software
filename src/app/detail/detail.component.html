@@ -1,0 +1,37 @@
+
+<h2>Progress Bar</h2>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+    70%
+  </div>
+  </div>
+<div class="container" align="center">
+<p class="bg-success"><font size="5">{{ project.projectid }}</font></p>
+<p class="bg-success"><font size="5">{{ project.name }}</font></p>
+</div>
+<!-- </div>
+<form #form="ngForm" class="well" >
+  <input type="text" name="id" [(ngModel)]="id">
+</form> -->
+<div class="btn-group-vertical">
+<button [routerLink]="['/stage1',id]" type="button" name="button1" class="btn btn-link">Stage 1</button>
+<button [disabled]="!arr[0]" [routerLink]="['/stage2',id]" type="button" name="button2" class="btn btn-link">Stage 2</button>
+<button [disabled]="!arr[1]" [routerLink]="['/stage3',id]" type="button" name="button3" class="btn btn-link">Stage 3</button>
+<button *ngIf="arr[2]" [disabled]="!arr[2]" type="button" name="button4" class="btn btn-link">Stage 4</button>
+<button *ngIf="arr[3]" [disabled]="!arr[3]" type="button" name="button5" class="btn btn-link">Stage 5</button>
+<button *ngIf="arr[4]" [disabled]="!arr[4]" type="button" name="button6" class="btn btn-link">Stage 6</button>
+<button *ngIf="arr[5]" [disabled]="!arr[5]" type="button" name="button7" class="btn btn-link">Stage 7</button>
+<button *ngIf="arr[6]" [disabled]="!arr[6]" type="button" name="button8" class="btn btn-link">Stage 8</button>
+<button *ngIf="arr[7]" [disabled]="!arr[7]" type="button" name="button9" class="btn btn-link">Stage 9</button>
+<button *ngIf="arr[8]" [disabled]="!arr[8]" type="button" name="button10" class="btn btn-link">Stage 10</button>
+<button *ngIf="arr[9]" [disabled]="!arr[9]" type="button" name="button10" class="btn btn-link">Stage 11</button>
+<button *ngIf="arr[10]" [disabled]="!arr[10]" type="button" name="button10" class="btn btn-link">Stage 12</button>
+<!-- <button [disabled]="!arr[11]" type="button" name="button10" class="btn btn-link">Stage 13</button>
+<button [disabled]="!arr[12]" type="button" name="button10" class="btn btn-link">Stage 14</button>
+<button [disabled]="!arr[13]" type="button" name="button10" class="btn btn-link">Stage 15</button>
+<button [disabled]="!arr[14]" type="button" name="button10" class="btn btn-link">Stage 16</button>
+<button [disabled]="!arr[15]" type="button" name="button10" class="btn btn-link">Stage 17</button>
+<button [disabled]="!arr[16]" type="button" name="button10" class="btn btn-link">Stage 18</button> -->
+</div>
+<!-- <p  [(ngModel)]="id"></p> -->

@@ -1,0 +1,38 @@
+<div>
+  <form>
+    <div class="form-group">
+      <label for="id">Project Id</label>
+        <input type="input" class="form-control" name="id" required placeholder="Projectid"
+        [(ngModel)]="Project.projectid">
+    </div>
+    <div class="form-group">
+      <label for="name">Project Name</label>
+        <input type="input" class="form-control" name="name" required placeholder="projectname"
+        [(ngModel)]="Project.name">
+    </div>
+    <button (click)="updateProject(Project)" type="button" class="btn btn-success">Update</button>
+    <b style="word-space:2em">&nbsp;&nbsp;</b>
+  </form>
+  <!-- <form>
+  <div class="form-group">
+    <label for="id">Field 1</label>
+      <input type="input" class="form-control" name="field1" required
+      [(ngModel)]="Head.field1">
+  </div>
+  <div class="form-group">
+    <label for="name">Field 2</label>
+      <input type="input" class="form-control" name="field2" required
+      [(ngModel)]="Head.field2">
+  </div>
+  <div class="form-group">
+    <label for="id">Field 3</label>
+      <input type="input" class="form-control" name="field3" required
+      [(ngModel)]="Head.field3">
+  </div>
+  <div class="form-group">
+    <label for="id">Field 4</label>
+      <input type="input" class="form-control" name="field4" required
+      [(ngModel)]="Head.field4">
+  </div>
+  </form> -->
+</div>

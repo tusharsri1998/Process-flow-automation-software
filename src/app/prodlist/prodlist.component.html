@@ -1,0 +1,12 @@
+<ul class="nav flex-column">
+  <div class="col-sm-6">
+    <div class="btn-group-vertical">
+    <button class="btn btn-link" (click)='onSelect(project)' [routerLink]="['/headform',project._id]" *ngFor= "let project of projects">{{project.projectid}}</button>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="btn-group-vertical">
+    <button *ngFor="let project of projects" class="btn btn-danger" (click)="test(project)">Delete</button>
+    </div>
+  </div>
+  </ul>
