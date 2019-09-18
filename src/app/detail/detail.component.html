@@ -18,7 +18,7 @@
 <button [routerLink]="['/stage1',id]" type="button" name="button1" class="btn btn-link">Stage 1</button>
 <button [disabled]="!arr[0]" [routerLink]="['/stage2',id]" type="button" name="button2" class="btn btn-link">Stage 2</button>
 <button [disabled]="!arr[1]" [routerLink]="['/stage3',id]" type="button" name="button3" class="btn btn-link">Stage 3</button>
-<button *ngIf="arr[2]" [disabled]="!arr[2]" type="button" name="button4" class="btn btn-link">Stage 4</button>
+<button [disabled]="!arr[2]" [routerLink]="['/stage4',id]" type="button" name="button4" class="btn btn-link">Stage 4</button>
 <button *ngIf="arr[3]" [disabled]="!arr[3]" type="button" name="button5" class="btn btn-link">Stage 5</button>
 <button *ngIf="arr[4]" [disabled]="!arr[4]" type="button" name="button6" class="btn btn-link">Stage 6</button>
 <button *ngIf="arr[5]" [disabled]="!arr[5]" type="button" name="button7" class="btn btn-link">Stage 7</button>

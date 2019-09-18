@@ -10,6 +10,7 @@ import { Stage1Component } from './stage1/stage1.component';
 import { NotificationComponent } from './notification/notification.component';
 import { Stage2Component } from './stage2/stage2.component';
 import { Stage3Component } from './stage3/stage3.component';
+import { Stage4Component } from './stage4/stage4.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/home',pathMatch:'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'stage1/:id', component:Stage1Component},
   {path: 'stage2/:id', component:Stage2Component},
   {path: 'stage3/:id', component:Stage3Component},
+  {path: 'stage4/:id', component:Stage4Component},
   {path: 'notification', component:NotificationComponent}
 ];
 

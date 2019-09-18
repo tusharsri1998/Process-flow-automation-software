@@ -21,6 +21,7 @@ import { Stage1Component } from './stage1/stage1.component';
 import { NotificationComponent } from './notification/notification.component';
 import { Stage2Component } from './stage2/stage2.component';
 import { Stage3Component } from './stage3/stage3.component';
+import { Stage4Component } from './stage4/stage4.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { Stage3Component } from './stage3/stage3.component';
     Stage1Component,
     NotificationComponent,
     Stage2Component,
-    Stage3Component
+    Stage3Component,
+    Stage4Component
   ],
   imports: [
     BrowserModule,
