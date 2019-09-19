@@ -33,14 +33,14 @@ export class ProductService {
       return this._http.put(this.baseUrl + '/changedate/' + id,{'data':data,'no':stageno})
     }
 
-    sendstage(data,docarr,id){
-      console.log(data, docarr);
-      return this._http.post(this.baseUrl + '/enter/'+id, {'data':data, 'docarr':docarr})
+    sendstage(data,docarr,id,auth){
+      console.log(auth);
+      return this._http.post(this.baseUrl + '/enter/'+id, {'data':data, 'docarr':docarr,'auth':auth})
     }
 
-    sendnewstage(data,docarr,id,t){
+    sendnewstage(data,docarr,id,auth,t){
       console.log(data, docarr);
-      return this._http.post(this.baseUrl + '/newstage/'+id, {'data':data, 'docarr':docarr,'t':t})
+      return this._http.post(this.baseUrl + '/newstage/'+id, {'data':data, 'docarr':docarr,'t':t,'auth':auth})
     }
 
     checktrue(data,user,name){

@@ -4,6 +4,8 @@ export class Doc {
 }
 
 export class Stages {
+  authority:Array<String>;
+  auth_no:Number;
   stage_no:Number;
   approval:Boolean;
   proposed_date:Date;

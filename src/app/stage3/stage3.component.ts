@@ -19,6 +19,7 @@ import * as moment from 'moment';
 export class Stage3Component implements OnInit {
 
   public id:String;
+  public autharr:String[]=[];
   public checkifres:Boolean=false;
   public dp:String;
   public da:String;
@@ -101,9 +102,14 @@ export class Stage3Component implements OnInit {
   }
 
   onItemSelect(item: any) {
+    this.autharr.push(item.item_text)
     console.log(item);
+    console.log(this.autharr)
   }
   onSelectAll(items: any) {
+    for(var i=0;i<items.length;i++){
+      this.autharr.push(items[i].item_text)
+    }
     console.log(items);
   }
 
@@ -176,22 +182,13 @@ export class Stage3Component implements OnInit {
 
   submitData(form: NgForm){
     console.log(form.value);
-    this.formvalue.push(form.value);
-    var t = 3
-    // if(this.formvalue[0].actdate>this.formvalue[0].proposed_date){
-    //   this.user.delay().
-    //   subscribe(res=>{
-    //     console.log(res),
-    //     alert('delay notification sent to admin')
-    //   });
-    // }
-    this.service.sendnewstage(form.value,this.dynamicArray,this.id,t)
+    var t = 3;
+    this.service.sendnewstage(form.value,this.dynamicArray,this.id,this.autharr,t)
     .subscribe(res=>{
       console.log(res),
       alert('success'),
       this.router.navigate(['/detail',this.id])
     });
-    // location.reload();
   }
 
 }

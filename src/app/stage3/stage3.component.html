@@ -9,6 +9,12 @@
   </div>
   <br>
   <h3>Done By {{ dat.ppdh }}</h3>
+  <br>
+  <div class="container" *ngIf="checkifres">
+    <h3>Approving Authority for this stage</h3>
+    <p *ngFor="let x of stagedata.stages[0].authority">{{ x }}</p>
+  </div>
+  <br>
   <form #data="ngForm" (ngSubmit)="submitData(data)">
     <div class="form-group">
         <label>Proposed Date</label>

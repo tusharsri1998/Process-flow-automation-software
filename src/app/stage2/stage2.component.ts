@@ -19,11 +19,12 @@ import * as moment from 'moment';
 export class Stage2Component implements OnInit {
 
   public id:String;
+  public autharr:String[]=[];
   public checkifres:Boolean=false;
   public dp:String;
   public da:String;
   stagedata:Stage;
-  public info:any[];
+  public info:User;
   dat:Head[]=[];
   users:any[]=[];
   dynamicArray:Array<Checklist>=[];
@@ -42,7 +43,7 @@ export class Stage2Component implements OnInit {
 
   ngOnInit() {
     this.user.givedata()
-    .subscribe((res:any[])=>{
+    .subscribe((res:User)=>{
       this.info = res,
       console.log(this.info)
     });
@@ -65,14 +66,16 @@ export class Stage2Component implements OnInit {
 
     });
     this.user.getUsers()
-    .subscribe((resData : any[]) => {
-      for(var i=0;i<resData.length;i++){
-          this.users.push(resData[i])
-          this.dropdownList.push({item_id:i, item_text:String(resData[i].name)})
-      }
-    })
-    this.dropdownList.push({item_id:6,item_text:'Noida'});
-    console.log(this.dropdownList);
+    .subscribe((resData : any[]) =>console.log(resData))
+
+    this.dropdownList = [
+      { item_id: 1, item_text: 'Rajat' },
+      { item_id: 2, item_text: 'Apoorv' },
+      { item_id: 3, item_text: 'Tushar' },
+      { item_id: 4, item_text: 'Ashwini' },
+      { item_id: 5, item_text: 'tushar' },
+      { item_id: 6, item_text: 'daddy' }
+    ];
 
     this.dropdownSettings = {
       singleSelection: false,
@@ -81,7 +84,8 @@ export class Stage2Component implements OnInit {
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
       itemsShowLimit: 3,
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      disabled:false
     };
     this.service.giveHead(this.id)
       .subscribe(
@@ -101,9 +105,14 @@ export class Stage2Component implements OnInit {
   }
 
   onItemSelect(item: any) {
+    this.autharr.push(item.item_text)
     console.log(item);
+    console.log(this.autharr)
   }
   onSelectAll(items: any) {
+    for(var i=0;i<items.length;i++){
+      this.autharr.push(items[i].item_text)
+    }
     console.log(items);
   }
 
@@ -175,9 +184,8 @@ export class Stage2Component implements OnInit {
 
   submitData(form: NgForm){
     console.log(form.value);
-    this.formvalue.push(form.value);
-    var t = 2
-    this.service.sendnewstage(form.value,this.dynamicArray,this.id,t)
+    var t = 2;
+    this.service.sendnewstage(form.value,this.dynamicArray,this.id,this.autharr,t)
     .subscribe(res=>{
       console.log(res),
       alert('success'),

@@ -7,6 +7,21 @@ const Head = require("../models/projectHead");
 const Stage = require("../models/stage");
 const User = require("../models/userdata");
 
+router.put('/authority/:Id',function(req,res){
+  Stage.findOne({'projid':req.params.Id},function(err,doc){
+    doc.stages[0].authority.push(req.body.a1)
+    doc.stages[0].authority.push(req.body.a2)
+    doc.stages[0].auth_no = req.body.auth_no
+    doc.save(function(err){
+      if(err){
+        console.log(err)
+      }else{
+        res.json(doc)
+      }
+    })
+  })
+})
+
 router.put('/setcheck/:Id',function(req,res){
   console.log(req.body);
   Stage.findOne({'projid':req.params.Id},
@@ -102,21 +117,25 @@ router.get('/givestages/:Id',function(req,res){
 })
 
 router.put('/partdoc/:Id',function(req,res){
-  Stage.findOne({'projid':req.params.Id},
+  Stage.findOneAndUpdate({'projid':req.params.Id,'stage_no':req.body.stage_no,'doc_name':req.body.doc_name},
+  {
+    "$set":{
+      "docinfo.$.check":true
+    }
+  },
   function(err,doc){
     if(err){
       console.log(err)
     }else{
-      doc.stages[2].docinfo[1].check = false,
-      doc.save(function(err,doc){
-          res.json(doc)
-      })
-
-    }
+      console.log('yay')
+      res.json(doc)
+      }
+    })
   })
-})
 
+var count1=0
 router.put('/checktrue',function(req,res){
+
   console.log(req.body);
   User.findOneAndUpdate({'_id':req.body.user._id, 'notify._id':req.body.data._id},
   {
@@ -138,15 +157,22 @@ router.put('/checktrue',function(req,res){
       var p = req.body.data.content.split(" ");
       console.log(p);
       var c = parseInt(p[p.length-1]);
-      doc.stages[c-1].approval = true;
-      doc.save(function(err){
-        if(err){
-          console.log(err)
-        }else{
-          // res.json(doc);
-          console.log(doc);
-        }
-      })
+      count1++;
+      console.log(count1);
+      if(doc.stages[c-1].auth_no==count1){
+        doc.stages[c-1].approval = true;
+        doc.save(function(err){
+          if(err){
+            console.log(err)
+          }else{
+            // res.json(doc);
+            console.log(doc);
+            count1=0;
+          }
+        })
+      }else{
+        console.log('approval pending')
+      }
     }
   })
   User.findOne({"name":req.body.name},function(err,data){
@@ -164,6 +190,7 @@ router.put('/checktrue',function(req,res){
 
 
 router.post('/newstage/:Id',function(req,res){
+  var counter = 0
   Stage.findOne({'projid':req.params.Id},function(err,doc){
     console.log(doc);
     doc.stages.push({
@@ -172,8 +199,13 @@ router.post('/newstage/:Id',function(req,res){
       proposed_date:req.body.data.proposed_date,
       // actual_date:req.body.actual_date
     })
+    for(var j=0;j<req.body.auth.length;j++){
+      counter++;
+      doc.stages[parseInt(req.body.t)-1].authority.push(req.body.auth[j])
+    }
+    doc.stages[parseInt(req.body.t)-1].auth_no=counter;
     for(var i=0;i<req.body.docarr.length;i++){
-      doc.stages[doc.stages.length-1].docinfo.push({doc_name:req.body.docarr[i].Item, check:req.body.docarr[i].check})
+      doc.stages[parseInt(req.body.t)-1].docinfo.push({doc_name:req.body.docarr[i].Item, check:req.body.docarr[i].check})
     }
     doc.save(function(err){
       if(err){
@@ -188,6 +220,7 @@ router.post('/newstage/:Id',function(req,res){
 });
 
 router.post('/enter/:Id',function(req,res){
+  var count = 0
   var newstage = new Stage();
   console.log(req.body);
   newstage.projid = req.params.Id;
@@ -197,6 +230,11 @@ router.post('/enter/:Id',function(req,res){
     proposed_date : req.body.data.proposed_date,
     // actual_date : req.body.data.actdate,
   });
+  for(var j=0;j<req.body.auth.length;j++){
+    count++;
+    newstage.stages[0].authority.push(req.body.auth[j])
+  }
+  newstage.stages[0].auth_no = count;
   for(var i=0;i<req.body.docarr.length;i++){
     newstage.stages[0].docinfo.push({
       doc_name:req.body.docarr[i].Item,

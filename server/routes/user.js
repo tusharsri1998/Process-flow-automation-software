@@ -7,6 +7,7 @@ const store = require('connect-mongo')(session);
 // const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/userdata");
+const Stage = require("../models/stage");
 // const Project = require("../models/project");
 
 mongoose.connect('mongodb://localhost/erp',{useNewUrlParser: true, useCreateIndex:true}, function(err){
@@ -117,9 +118,6 @@ router.post("/login", (req, res, next) => {
                 expiresIn: "1h"
             }
           );
-          // res.cookie("sessionId",token,{httpOnly:true,secure:true})
-          // req.session.email = user.email;
-          // console.log(req.session.email);
           return res.status(200).json({
             idtoken: token,
             expiresIn: '3600'
@@ -192,16 +190,19 @@ router.get('/notifyadmin',(req,res)=>{
 
 router.post('/appr',(req,res)=>{
   console.log(req.body);
-  User.findOne({"name":"tushar"},function(err,data){
-    data.notify.push({content:'Approval request for stage '+req.body.s,approval:false,proid:req.body.id});
-    data.save(function(err){
-      if(err){
-        console.log(err)
-      }else{
-        console.log(data,'notified');
-        res.json(data);
-      }
-    })
+  Stage.findOne({'projid':req.body.id},function(err,doc){
+    for(var i=0;i<doc.stages[parseInt(req.body.s)-1].authority.length;i++){
+      User.findOne({"name":doc.stages[parseInt(req.body.s)-1].authority[i]},function(err,data){
+        data.notify.push({content:'Approval request for stage '+req.body.s,approval:false,proid:req.body.id});
+        data.save(function(err){
+          if(err){
+            console.log(err)
+          }else{
+            console.log('sent')
+          }
+        })
+      })
+    }
   })
 });
 

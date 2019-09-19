@@ -3,6 +3,8 @@ const Schema = mongoose.Schema;
 const stageSchema = new Schema({
   projid:[{type: Schema.Types.ObjectId, ref: 'Project',index:true}],
   stages:[{
+    authority:[String],
+    auth_no:{type:Number},
     stage_no:{type:Number},
     approval:{type:Boolean},
     proposed_date:{type:Date},

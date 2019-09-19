@@ -19,6 +19,7 @@ import * as moment from 'moment';
 export class Stage4Component implements OnInit {
 
   public id:String;
+  public autharr:String[]=[];
   public checkifres:Boolean=false;
   public dp:String;
   public da:String;
@@ -101,9 +102,14 @@ export class Stage4Component implements OnInit {
   }
 
   onItemSelect(item: any) {
+    this.autharr.push(item.item_text)
     console.log(item);
+    console.log(this.autharr)
   }
   onSelectAll(items: any) {
+    for(var i=0;i<items.length;i++){
+      this.autharr.push(items[i].item_text)
+    }
     console.log(items);
   }
 
@@ -177,7 +183,7 @@ export class Stage4Component implements OnInit {
     console.log(form.value);
     this.formvalue.push(form.value);
     var t = 4
-    this.service.sendnewstage(form.value,this.dynamicArray,this.id,t)
+    this.service.sendnewstage(form.value,this.dynamicArray,this.id,t,this.autharr)
     .subscribe(res=>{
       console.log(res),
       alert('success'),

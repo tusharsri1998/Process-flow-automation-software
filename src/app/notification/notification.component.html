@@ -44,7 +44,7 @@
     <button  *ngFor="let data of info.notify" class="btn btn-success" (click)="disp(data)" ><ng-template [ngIf]="!data.approval">Approve</ng-template></button>
     </div>
     <div class="btn-group-vertical" *ngIf="info.user_type==2 || info.user_type==3">
-      <button *ngFor="let data of info.notify" class="btn btn-success" ><ng-template [ngIf]="!data.approval">Mark as Read</ng-template></button>
+      <button *ngFor="let data of info.notify" class="btn btn-success" (click)="disp(data)" ><ng-template [ngIf]="!data.approval">Mark as Read</ng-template></button>
     </div>
   </div>
 </div>
