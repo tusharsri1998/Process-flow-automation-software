@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.0.1",
     "@angular/router": "~8.0.1",
     "angular-jwt": "^0.1.11",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.0.0",
     "cookie-parser": "^1.4.4",
